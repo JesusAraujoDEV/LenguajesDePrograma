@@ -47,7 +47,7 @@ El notebook está dividido en cuatro secciones principales, cada una dedicada a 
 
 1. Clonar este repositorio:
    ```bash
-   git clone https://github.com/usuario/proyecto-introduccion-lenguajes.git
+   git clone git@github.com:JesusAraujoDEV/LenguajesDePrograma.git
    cd proyecto-introduccion-lenguajes
    ```
 
