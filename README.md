@@ -43,25 +43,44 @@ El notebook está dividido en cuatro secciones principales, cada una dedicada a 
   - Rust >= 1.65
   - Go >= 1.20
 
+
 ## Instalación
 
 1. Clonar este repositorio:
    ```bash
    git clone git@github.com:JesusAraujoDEV/LenguajesDePrograma.git
-   cd proyecto-introduccion-lenguajes
+   cd LenguajesDePrograma
    ```
 
-2. Instalar dependencias necesarias:
+2. Navegar a la carpeta del lenguaje deseado:
+   - Para Ruby:
+     ```bash
+     cd Ruby
+     ```
+   - Para PHP:
+     ```bash
+     cd PHP
+     ```
+   - Para Rust:
+     ```bash
+     cd Rust
+     ```
+   - Para Go:
+     ```bash
+     cd Go
+     ```
+
+3. Instalar dependencias necesarias (si aplica):
    ```bash
    pip install notebook
    ```
 
-3. Ejecutar el notebook:
+4. Ejecutar el notebook:
    ```bash
    jupyter notebook
    ```
 
-4. Abrir el archivo `introduccion_lenguajes.ipynb` en el navegador.
+5. Abrir el archivo correspondiente en el navegador.
 
 ## Uso
 
