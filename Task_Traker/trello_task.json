@@ -1,1 +1,12 @@
-{}
+{
+    "tareas": [
+        {
+            "id": 1,
+            "titulo": "ma",
+            "descripcion": "msks",
+            "status": "Pendiente",
+            "creacion": "2025-02-03",
+            "vencimiento": "2025-02-19"
+        }
+    ]
+}

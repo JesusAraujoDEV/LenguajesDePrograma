@@ -1,15 +1,17 @@
 import sys
-import datetime
+from datetime import datetime
 import json
+import re
 
 # Clase para crear una tarea del task traker
 class Task:
 
-    def __init__(self,titulo,descripcion,fecha_vencimiento):
+    def __init__(self,id,titulo,descripcion,fecha_vencimiento):
+        self.id = id
         self.titulo = titulo
         self.descripcion = descripcion
         self.status = "Pendiente"
-        self.fecha_creacion = datetime.datetime().now().strftime("%Y-%m-%d %H:%M:%S")
+        self.fecha_creacion = datetime.now().strftime("%Y-%m-%d")
         self.fecha_vencimiento = fecha_vencimiento
 
 
@@ -20,38 +22,95 @@ class Utilidad_json():
     def __init__(self):
         pass
 
-    def read_tasks(operation):
+    def read_tasks(self,operation):
 
         # listar alls task, for status (Pending, progress, Completed), for expiration date
 
         if(operation == "Pendiente"):
-            pass
+            
+            # obtengo todas las tareas
+            task = self.list_all_task()
+
+            for tarea in task["tareas"]:
+
+                # Solo mostramos las tareas que tengan el status Pendiente
+                if(tarea["status"] == "Pendiente"):
+                    print(tarea)
 
         elif(operation == "Progreso"):
-            pass
+            
+            # obtengo todas las tareas
+            task = self.list_all_task()
+
+            for tarea in task["tareas"]:
+
+                # Solo mostramos las tareas que tengan el status Progreso
+                if(tarea["status"] == "Progreso"):
+                    print(tarea)
         
         elif(operation == "Completada"):
-            pass
+            
+            # obtengo todas las tareas
+            task = self.list_all_task()
+
+            for tarea in task["tareas"]:
+
+                # Solo mostramos las tareas que tengan el status Completada
+                if(tarea["status"] == "Completada"):
+                    print(tarea)
 
         elif(operation == "Vencimiento"):
-            pass
+            pass            
+        
+        else:
+            print(f"Esta operacion {operation} no existe")
 
-        elif(operation == "todos"):
-            
-            # Abrir y leer el archivo
+    def list_all_task(self):
+        
+        # Abrir y leer el archivo
             with open("trello_task.json", "r") as archivo:
                 datos = json.load(archivo)
             return datos
+
+    def write_task(self,datos):
         
+        with open("trello_task.json", "w") as archivo:
+            json.dump(datos, archivo, indent=4)
 
-    def write_task():
-        pass
+    def create_task(self):
 
-    def create_task():
+        # entrada de datos para crear la tarea
+        titulo, descripcion, vencimiento = entrada_datos()
 
-        titulo = input("Titulo de la tarea: ")
-        descripcion = input("Descripcion de la tarea: ")
-        vencimiento = input("Vencimiento de la tarea: ")
+        data = self.list_all_task()
+
+        if len(data) == 0:
+            id = 0
+        else:
+            id = 0
+            for tarea in data["tareas"]:
+                if(tarea["id"] > id):
+                    id = tarea["id"]
+
+        create_task = Task(id+1,titulo,descripcion, vencimiento)
+
+        new_task  = {
+            "id": create_task.id,
+            "titulo": create_task.titulo,
+            "descripcion" : create_task.descripcion,
+            "status": create_task.status,
+            "creacion": create_task.fecha_creacion,
+            "vencimiento" : create_task.fecha_vencimiento
+        }
+
+        # obtenemos todas las tareas
+        task = self.list_all_task()
+
+        # agregamos la tarea nueva a las otras tareas
+        task["tareas"].append(new_task)
+
+        # actualizamos el json
+        self.write_task(task)
         
 
     def modify_task( id, operation):
@@ -77,3 +136,31 @@ class Utilidad_json():
 
 
 
+def entrada_datos():
+
+    while True:
+        try:
+
+            titulo = input("Titulo de la tarea: ")
+
+            # Verifica si está vacío o solo tiene espacios
+            if not titulo.strip():  
+                raise ValueError("El título no puede estar vacío.")
+            
+            descripcion = input("Descripcion de la tarea: ")
+
+            # Verifica si está vacío o solo tiene espacios
+            if not descripcion.strip():
+                raise ValueError("La descripción no puede estar vacía.")
+            
+            vencimiento = input("Vencimiento de la tarea (YYYY-MM-DD): ")
+
+            # Validar formato de fecha
+            if not re.match(r"\d{4}-\d{2}-\d{2}", vencimiento):
+                raise ValueError("La fecha de vencimiento debe estar en el formato YYYY-MM-DD.")
+            
+
+            return titulo, descripcion, vencimiento
+
+        except ValueError as e:
+            print(f"Error: {e}. Por favor, ingresa los datos nuevamente.")
