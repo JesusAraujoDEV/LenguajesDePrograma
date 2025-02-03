@@ -12,10 +12,6 @@ class Task:
         self.fecha_creacion = datetime.datetime().now().strftime("%Y-%m-%d %H:%M:%S")
         self.fecha_vencimiento = fecha_vencimiento
 
-    # Metodo para crear una tarea
-    def create_task(self):
-        pass
-
 
 
 # Clase de utilidad para manejar el json donde se guardan las tareas del task traker
@@ -47,6 +43,13 @@ class Utilidad_json():
 
     def write_task(self):
         pass
+
+    def create_task(self):
+
+        titulo = input("Titulo de la tarea: ")
+        descripcion = input("Descripcion de la tarea: ")
+        vencimiento = input("Vencimiento de la tarea: ")
+        
 
     def modify_task(self, operation):
 
