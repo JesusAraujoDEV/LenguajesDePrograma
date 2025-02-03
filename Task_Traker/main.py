@@ -17,6 +17,17 @@ def mostrar_ayuda():
         - 'delete' <eliminar una tarea>
     """)
 
+def id_task():
+    while True:
+        try:    
+            id = int(input("Indica el indice de la tarea que desea modificar: "))
+            return id 
+        except ValueError:
+
+            # Si ocurre un ValueError, significa que el valor no es un número válido
+            print("Por favor, ingresa un número válido.")
+
+
 
 if __name__ == '__main__':
 
@@ -27,7 +38,9 @@ if __name__ == '__main__':
     print("\nBienvenido al task traker, <utiliza el comando 'help' para mostrar la lista de comandos>\n")
 
     # si tiene mas de un argumento accede a las condiciones
-    if(len(sys.argv) > 1):
+    if(len(sys.argv) == 2):
+
+        print(sys.argv)
 
         # lista de comandos
         if(sys.argv[1].lower() == 'help'):
@@ -41,31 +54,77 @@ if __name__ == '__main__':
 
         # verificamos si el argumento es 'modify-tittle'
         elif(sys.argv[1].lower() == 'modify-tittle'):
-            pass
+            
+            # Verificamos si existen tareas
+            if(len(Utilidad_json.read_tasks("todos")) > 0):
+
+                # ingresamos el id de la tarea que desea modificar
+                id = id_task()
+
+                # modificamos el titulo de la tarea
+                Utilidad_json.modify_task(id, "titulo")
+
+            else:
+                print("No hay tareas para modificar")
 
         # verificamos si el argumento es 'modify-status'
         elif(sys.argv[1].lower() == 'modify-status'):
-            pass
+            
+            # Verificamos si existen tareas
+            if(len(Utilidad_json.read_tasks("todos")) > 0):
+
+                # ingresamos el id de la tarea que desea modificar
+                id = id_task()
+
+                # modificamos el status de la tarea
+                Utilidad_json.modify_task(id, "status")
+
+            else:
+                print("No hay tareas para modificar")
 
         # verificamos si el argumento es 'modify-expiration_date'
         elif(sys.argv[1].lower() == 'modify-expiration_date'):
-            pass
+
+            # Verificamos si existen tareas
+            if(len(Utilidad_json.read_tasks("todos")) > 0):
+
+                # ingresamos el id de la tarea que desea modificar
+                id = id_task()
+
+                # modificamos el vencimiento de la tarea
+                Utilidad_json.modify_task(id, "vencimiento")
+
+            else:
+                print("No hay tareas para modificar")
 
         # verificamos si el argumento es 'list-all'
         elif(sys.argv[1].lower() == 'list-all'):
-            pass
+            
+            # listamos todas las tareas
+            Utilidad_json.read_tasks("")
 
         # verificamos si el argumento es 'list-status'
         elif(sys.argv[1].lower() == 'list-status'):
-            pass
+            
+            # listamos las tareas por status
+            Utilidad_json.read_tasks("status")
 
         # verificamos si el argumento es 'list-expiration_date'
         elif(sys.argv[1].lower() == 'list-expiration_date'):
-            pass
+            
+            # listamos las por fecha de vencimiento tareas
+            Utilidad_json.read_tasks("vencimiento")
 
         # verificamos si el argumento es 'delete'
         elif(sys.argv[1].lower() == 'delete'):
-            pass
+            
+            Utilidad_json.delete_task(id)
+
+    else:
+    
+        # Manejo de errores con los comandos
+        print(f"Error el comando '{sys.argv}' es desconocido")
+        mostrar_ayuda() # mostrar la lista de comandos disponibles
 
 
 
