@@ -40,7 +40,7 @@ if __name__ == '__main__':
     # si tiene mas de un argumento accede a las condiciones
     if(len(sys.argv) == 2):
 
-        print(sys.argv)
+        #print(sys.argv)
 
         # lista de comandos
         if(sys.argv[1].lower() == 'help'):
@@ -56,13 +56,13 @@ if __name__ == '__main__':
         elif(sys.argv[1].lower() == 'modify-tittle'):
             
             # Verificamos si existen tareas
-            if(len(Utilidad_json.read_tasks("todos")) > 0):
+            if(len(Utilidad_json().list_all_task()) > 0):
 
                 # ingresamos el id de la tarea que desea modificar
                 id = id_task()
 
                 # modificamos el titulo de la tarea
-                Utilidad_json.modify_task(id, "titulo")
+                Utilidad_json().modify_task(id, "titulo")
 
             else:
                 print("No hay tareas para modificar")
@@ -71,13 +71,13 @@ if __name__ == '__main__':
         elif(sys.argv[1].lower() == 'modify-status'):
             
             # Verificamos si existen tareas
-            if(len(Utilidad_json.read_tasks("todos")) > 0):
+            if(len(Utilidad_json().list_all_task()) > 0):
 
                 # ingresamos el id de la tarea que desea modificar
                 id = id_task()
 
                 # modificamos el status de la tarea
-                Utilidad_json.modify_task(id, "status")
+                Utilidad_json().modify_task(id, "status")
 
             else:
                 print("No hay tareas para modificar")
@@ -86,13 +86,13 @@ if __name__ == '__main__':
         elif(sys.argv[1].lower() == 'modify-expiration_date'):
 
             # Verificamos si existen tareas
-            if(len(Utilidad_json.read_tasks("todos")) > 0):
+            if(len(Utilidad_json().list_all_task()) > 0):
 
                 # ingresamos el id de la tarea que desea modificar
                 id = id_task()
 
                 # modificamos el vencimiento de la tarea
-                Utilidad_json.modify_task(id, "vencimiento")
+                Utilidad_json().modify_task(id, "vencimiento")
 
             else:
                 print("No hay tareas para modificar")
@@ -100,25 +100,53 @@ if __name__ == '__main__':
         # verificamos si el argumento es 'list-all'
         elif(sys.argv[1].lower() == 'list-all'):
             
-            # listamos todas las tareas
-            Utilidad_json.read_tasks("")
+            # Verificamos si existen tareas
+            if(len(Utilidad_json().list_all_task()) > 0):
+
+                # listamos todas las tareas
+                task = Utilidad_json().list_all_task()
+
+                # Mostrar todos los elementos del JSON
+                for tarea in task["tareas"]:
+                    print(tarea)
+
+            else:
+                print("No hay tareas para listar")
 
         # verificamos si el argumento es 'list-status'
         elif(sys.argv[1].lower() == 'list-status'):
             
-            # listamos las tareas por status
-            Utilidad_json.read_tasks("status")
+            # Verificamos si existen tareas
+            if(len(Utilidad_json().list_all_task()) > 0):
+
+                # listamos las tareas por status
+                Utilidad_json().read_tasks("status")
+
+            else:
+                print("No hay tareas para listar")
 
         # verificamos si el argumento es 'list-expiration_date'
         elif(sys.argv[1].lower() == 'list-expiration_date'):
             
-            # listamos las por fecha de vencimiento tareas
-            Utilidad_json.read_tasks("vencimiento")
+            # Verificamos si existen tareas
+            if(len(Utilidad_json().list_all_task()) > 0):
+
+                # listamos las por fecha de vencimiento tareas
+                Utilidad_json().read_tasks("vencimiento")
+
+            else:
+                print("No hay tareas para listar")
 
         # verificamos si el argumento es 'delete'
         elif(sys.argv[1].lower() == 'delete'):
-            
-            Utilidad_json.delete_task(id)
+
+            # Verificamos si existen tareas
+            if(len(Utilidad_json().list_all_task()) > 0):
+
+                Utilidad_json().delete_task(id)
+
+            else:
+                print("No hay tareas para eliminar")
 
     else:
     
