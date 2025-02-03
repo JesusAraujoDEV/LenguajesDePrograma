@@ -20,7 +20,7 @@ class Utilidad_json():
     def __init__(self):
         pass
 
-    def read_tasks(self,operation):
+    def read_tasks(operation):
 
         # listar alls task, for status (Pending, progress, Completed), for expiration date
 
@@ -36,32 +36,35 @@ class Utilidad_json():
         elif(operation == "Vencimiento"):
             pass
 
-        else:
-            pass
+        elif(operation == "todos"):
+            
+            # Abrir y leer el archivo
+            with open("trello_task.json", "r") as archivo:
+                datos = json.load(archivo)
+            return datos
         
+
+    def write_task():
         pass
 
-    def write_task(self):
-        pass
-
-    def create_task(self):
+    def create_task():
 
         titulo = input("Titulo de la tarea: ")
         descripcion = input("Descripcion de la tarea: ")
         vencimiento = input("Vencimiento de la tarea: ")
         
 
-    def modify_task(self, operation):
+    def modify_task( id, operation):
 
         # modify status, tittle, description, expiration date 
 
-        if(operation == "Titulo"):
+        if(operation == "titulo"):
             pass
 
         elif(operation == "descripcion"):
             pass
         
-        elif(operation == "Vencimiento"):
+        elif(operation == "vencimiento"):
             pass
 
         elif(operation == "status"):
@@ -69,7 +72,7 @@ class Utilidad_json():
 
         pass
 
-    def delete_task(self):
+    def delete_task(id):
         pass
 
 
