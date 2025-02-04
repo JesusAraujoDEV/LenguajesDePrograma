@@ -177,7 +177,6 @@ if __name__ == '__main__':
     
         # Manejo de errores con los comandos
         print(f"Error el comando '{sys.argv}' es desconocido")
-        mostrar_ayuda() # mostrar la lista de comandos disponibles
 
 
 
