@@ -13,19 +13,33 @@ def mostrar_ayuda():
         - 'modify-expiration_date' <modificar el vencimiento de una tarea>
         - 'list-all' <listar todas las tareas>
         - 'list-status' <listar por status>
-        - 'list-expiration_date' <listar por fecha de vencimiento>
         - 'delete' <eliminar una tarea>
     """)
 
 def id_task():
     while True:
         try:    
-            id = int(input("Indica el indice de la tarea que desea modificar: "))
+            id = int(input("Indica el indice de la tarea que desea modificar o eliminar: "))
             return id 
         except ValueError:
 
             # Si ocurre un ValueError, significa que el valor no es un número válido
             print("Por favor, ingresa un número válido.")
+
+
+def status_task():
+
+    # Lista de valores permitidos
+    status_validos = ["pendiente", "progreso", "completada"]
+
+    while True:
+        status = input("Introduce el status de la tarea (pendiente, progreso, completada): ").strip().lower()
+        
+        # Validación
+        if status in status_validos:
+            return status
+        else:
+            print("Status inválido. Por favor, ingresa uno de los siguientes: pendiente, progreso, completada.")
 
 
 
@@ -119,20 +133,11 @@ if __name__ == '__main__':
             # Verificamos si existen tareas
             if(len(Utilidad_json().list_all_task()) > 0):
 
+                # indicar el status
+                status = status_task()
+
                 # listamos las tareas por status
-                Utilidad_json().read_tasks("status")
-
-            else:
-                print("No hay tareas para listar")
-
-        # verificamos si el argumento es 'list-expiration_date'
-        elif(sys.argv[1].lower() == 'list-expiration_date'):
-            
-            # Verificamos si existen tareas
-            if(len(Utilidad_json().list_all_task()) > 0):
-
-                # listamos las por fecha de vencimiento tareas
-                Utilidad_json().read_tasks("vencimiento")
+                Utilidad_json().read_tasks(status)
 
             else:
                 print("No hay tareas para listar")
@@ -143,6 +148,10 @@ if __name__ == '__main__':
             # Verificamos si existen tareas
             if(len(Utilidad_json().list_all_task()) > 0):
 
+                # ingresamos el id de la tarea que desea modificar
+                id = id_task()
+
+                # Eliminamos tarea
                 Utilidad_json().delete_task(id)
 
             else:

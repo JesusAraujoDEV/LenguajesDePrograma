@@ -2,11 +2,35 @@
     "tareas": [
         {
             "id": 1,
-            "titulo": "ma",
+            "titulo": "Examen de Matematica",
             "descripcion": "msks",
-            "status": "Pendiente",
+            "status": "completada",
             "creacion": "2025-02-03",
             "vencimiento": "2025-02-19"
+        },
+        {
+            "id": 2,
+            "titulo": "Examen de programacion matematica",
+            "descripcion": "metodo grafico, metodo simplex, metodo dos fases",
+            "status": "Pendiente",
+            "creacion": "2025-02-04",
+            "vencimiento": "2025-03-01"
+        },
+        {
+            "id": 3,
+            "titulo": "Examen de redes",
+            "descripcion": "Redes LAN, topologias de redes (estrella, bus, punto a punto, arbol .. ect), Redes WAN",
+            "status": "Pendiente",
+            "creacion": "2025-02-04",
+            "vencimiento": "2025-03-15"
+        },
+        {
+            "id": 4,
+            "titulo": "Examen de sist Operativos",
+            "descripcion": "Linux distro",
+            "status": "Pendiente",
+            "creacion": "2025-02-04",
+            "vencimiento": "2025-04-20"
         }
     ]
 }
