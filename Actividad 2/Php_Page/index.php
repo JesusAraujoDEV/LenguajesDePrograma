@@ -10,7 +10,7 @@
 
 
 <div class="div-form">
-<h2>Iniciar Sesión</h2>
+<h2 style="color: white;">Iniciar Sesión</h2>
 
 <form method="POST" action="procesar.php">
     <label for="usuario">Usuario:</label><br>
