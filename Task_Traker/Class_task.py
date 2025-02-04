@@ -26,7 +26,7 @@ class Utilidad_json():
 
         # listar alls task, for status (Pending, progress, Completed), for expiration date
 
-        if(operation == "Pendiente"):
+        if(operation == "pendiente"):
             
             # obtengo todas las tareas
             task = self.list_all_task()
@@ -34,10 +34,10 @@ class Utilidad_json():
             for tarea in task["tareas"]:
 
                 # Solo mostramos las tareas que tengan el status Pendiente
-                if(tarea["status"] == "Pendiente"):
+                if(tarea["status"].lower() == "pendiente"):
                     print(tarea)
 
-        elif(operation == "Progreso"):
+        elif(operation == "progreso"):
             
             # obtengo todas las tareas
             task = self.list_all_task()
@@ -45,10 +45,10 @@ class Utilidad_json():
             for tarea in task["tareas"]:
 
                 # Solo mostramos las tareas que tengan el status Progreso
-                if(tarea["status"] == "Progreso"):
+                if(tarea["status"].lower() == "progreso"):
                     print(tarea)
         
-        elif(operation == "Completada"):
+        elif(operation == "completada"):
             
             # obtengo todas las tareas
             task = self.list_all_task()
@@ -56,11 +56,8 @@ class Utilidad_json():
             for tarea in task["tareas"]:
 
                 # Solo mostramos las tareas que tengan el status Completada
-                if(tarea["status"] == "Completada"):
-                    print(tarea)
-
-        elif(operation == "Vencimiento"):
-            pass            
+                if(tarea["status"].lower() == "completada"):
+                    print(tarea)   
         
         else:
             print(f"Esta operacion {operation} no existe")
@@ -113,26 +110,63 @@ class Utilidad_json():
         self.write_task(task)
         
 
-    def modify_task( id, operation):
+    def modify_task(self, id, operation):
 
         # modify status, tittle, description, expiration date 
 
+        # Leer todas las tareas
+        tasks = self.list_all_task()
+        
+        # Buscar tarea por ID
+        task_found = None
+        for tarea in tasks["tareas"]:
+            if tarea["id"] == id:
+                task_found = tarea
+                break
+
+        if task_found is None:
+            print("Tarea no encontrada.")
+            return
+
         if(operation == "titulo"):
-            pass
+            task_found["titulo"] = input("Nuevo título: ")
 
         elif(operation == "descripcion"):
-            pass
+            task_found["descripcion"] = input("Nueva descripción: ")
         
         elif(operation == "vencimiento"):
-            pass
+            task_found["vencimiento"] = input("Nueva fecha de vencimiento (YYYY-MM-DD): ")
 
         elif(operation == "status"):
-            pass
+            task_found["status"] = input("Nuevo estado (pendiente/progreso/completada): ")
 
-        pass
+        else:
+            print("Operación inválida.")
+            return
+        
+        # Guardar los cambios en el archivo JSON
+        self.write_task(tasks)
+        print("Tarea actualizada con éxito.")
 
-    def delete_task(id):
-        pass
+    def delete_task(self,id):
+        
+        # Leer todas las tareas del archivo JSON
+        tasks = self.list_all_task()
+        
+        # Buscar y eliminar la tarea con el ID especificado
+        found = False
+        for tarea in tasks["tareas"]:
+            if tarea["id"] == id:
+                tasks["tareas"].remove(tarea)
+                found = True
+                break
+
+        if not found:
+            print("Tarea no encontrada.")
+        else:
+            # Escribir los datos actualizados en el archivo
+            self.write_task(tasks)
+            print("Tarea eliminada con éxito.")
 
 
 
