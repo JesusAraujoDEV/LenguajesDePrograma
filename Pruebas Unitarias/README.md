@@ -1,6 +1,5 @@
 # 🛠 Guía de Entorno y Pruebas Unitarias
 
----
 
 ## 📦 Dependencias Utilizadas
 Este proyecto utiliza las siguientes dependencias:
