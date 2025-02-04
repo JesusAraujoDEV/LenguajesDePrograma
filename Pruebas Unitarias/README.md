@@ -1,12 +1,5 @@
 # 🛠 Guía de Entorno y Pruebas Unitarias
 
-## 📌 Activar el Entorno Virtual
-Para ejecutar el entorno virtual, abre la terminal en la raíz del proyecto y ejecuta el siguiente comando:
-
-```sh
-.\venv\Scripts\activate
-```
-
 ---
 
 ## 📦 Dependencias Utilizadas
@@ -15,7 +8,7 @@ Este proyecto utiliza las siguientes dependencias:
 
 Puedes instalarlas con:
 ```sh
-pip install -r requirements.txt
+pip install pytest
 ```
 
 ---
@@ -40,7 +33,6 @@ Esto mostrará detalles sobre cada prueba realizada.
 
 ---
 
-📌 **Nota:** Asegúrate de tener el entorno virtual activado antes de ejecutar las pruebas.
 
 🚀 ¡Listo para probar tu código de forma eficiente! 🎯
 
