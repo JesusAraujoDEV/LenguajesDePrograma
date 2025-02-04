@@ -10,6 +10,7 @@ def mostrar_ayuda():
         - 'create' <crear una tarea>
         - 'modify-tittle' <modificar el titulo de una tarea>
         - 'modify-status' <modificar el status de una tarea>
+        - 'modify-description' <modificar la descripcion de una tarea>
         - 'modify-expiration_date' <modificar el vencimiento de una tarea>
         - 'list-all' <listar todas las tareas>
         - 'list-status' <listar por status>
@@ -92,6 +93,21 @@ if __name__ == '__main__':
 
                 # modificamos el status de la tarea
                 Utilidad_json().modify_task(id, "status")
+
+            else:
+                print("No hay tareas para modificar")
+
+        # verificamos si el argumento es 'modify-status'
+        elif(sys.argv[1].lower() == 'modify-description'):
+            
+            # Verificamos si existen tareas
+            if(len(Utilidad_json().list_all_task()) > 0):
+
+                # ingresamos el id de la tarea que desea modificar
+                id = id_task()
+
+                # modificamos el status de la tarea
+                Utilidad_json().modify_task(id, "descripcion")
 
             else:
                 print("No hay tareas para modificar")
