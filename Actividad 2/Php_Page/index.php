@@ -3,38 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Simple</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
 
-    <div class="div-form">
-    <h2>Formulario de Contacto</h2>
 
-        <form method="POST" action="">
-            <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" required><br>
+<div class="div-form">
+<h2>Iniciar Sesión</h2>
 
-            <label for="correo">Correo:</label><br>
-            <input type="email" id="correo" name="correo" required><br>
+<form method="POST" action="procesar.php">
+    <label for="usuario">Usuario:</label><br>
+    <input type="text" id="usuario" name="usuario" required><br>
 
-            <button type="submit">Enviar</button>
-        </form>
+    <label for="correo">Correo:</label><br>
+    <input type="email" id="correo" name="correo" required><br>
 
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombre = htmlspecialchars($_POST["nombre"]);
-            $correo = htmlspecialchars($_POST["correo"]);
-            
-            echo "<h3>Datos recibidos:</h3>";
-            echo "<p><strong>Nombre:</strong> $nombre</p>";
-            echo "<p><strong>Correo:</strong> $correo</p>";
-        }
-        ?>
-    </div>
+    <label for="telefono">Teléfono:</label><br>
+    <input type="tel" id="telefono" name="telefono" required><br>
 
+    <label for="password">Contraseña:</label><br>
+    <input type="password" id="password" name="password" required><br>
 
+    <button type="submit">Ingresar</button>
+</form>
+</div>
 
 </body>
 </html>
