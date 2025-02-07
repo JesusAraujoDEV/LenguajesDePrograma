@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: url('Fondologin.jpg') no-repeat center center fixed;
+    background-size: cover;
+    
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+form {
+    display: inline-block;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.div-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+}
+
+input, button {
+    margin: 10px 0;
+    padding: 8px;
+    width: 80%;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para la tarjeta */
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    max-width: 300px;
+    margin-top: 20px;
+}
+
+.card h3 {
+    color: #007bff;
+}
+
+.card p {
+    font-size: 16px;
+    color: #333;
+}
