@@ -1,8 +1,7 @@
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Card } from './card.entity'
+import { Card } from './card.entity';
 import { CardInterface } from './card.interface';
 
 @Injectable()
@@ -20,12 +19,22 @@ export class CardService {
     return this.cardsRepository.findOneBy({ id });
   }
 
-  create(cardObject: CardInterface): Promise <Card> {
-    const card = this.cardsRepository.create(cardObject)
-    return this.cardsRepository.save(card)
+  create(cardObject: CardInterface): Promise<Card> {
+    const card = this.cardsRepository.create(cardObject);
+    return this.cardsRepository.save(card);
   }
 
   async remove(id: number): Promise<void> {
     await this.cardsRepository.delete(id);
+  }
+
+  async update(id: number, cardData: CardInterface): Promise<Card | null> {
+    await this.cardsRepository.update(id, cardData);
+    return this.cardsRepository.findOneBy({ id });
+  }
+
+  async partialUpdate(id: number, cardData: Partial<CardInterface>): Promise<Card | null> {
+    await this.cardsRepository.update(id, cardData);
+    return this.cardsRepository.findOneBy({ id });
   }
 }
