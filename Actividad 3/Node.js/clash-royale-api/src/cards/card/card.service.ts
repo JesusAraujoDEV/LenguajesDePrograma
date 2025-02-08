@@ -19,6 +19,10 @@ export class CardService {
     return this.cardsRepository.findOneBy({ id });
   }
 
+  findOneByName(name: string): Promise<Card | null> {
+    return this.cardsRepository.findOneBy({ name });
+  }
+
   create(cardObject: CardInterface): Promise<Card> {
     const card = this.cardsRepository.create(cardObject);
     return this.cardsRepository.save(card);

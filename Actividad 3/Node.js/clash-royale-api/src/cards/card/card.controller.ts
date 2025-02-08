@@ -17,6 +17,15 @@ export class CardController {
     return await this.cardService.findAll(); // Devuelve todas las cartas si no se proporciona type
   }
 
+  @Get(':name')
+  async findByName(@Param('name') name: string): Promise<Card | null | string> {
+    if (name) {
+      return await this.cardService.findOneByName(name); 
+    }
+    return 'Debe proporcionar un nombre'; 
+  }
+
+
   @Post()
   async create(@Req() request: Request): Promise<Card> {
     return await this.cardService.create(request.body);
