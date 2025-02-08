@@ -1,11 +1,8 @@
 export interface CardInterface {
     name: string;
-    image: string;
+    image1: string;
+    image2: string;
     rarity: string;
-    type: string;
-    damage: number;
-    health: number;
-    targets: string;
-    speed: string;
-    range: string;
+    maxLevel: number;
+    elixirCost: number;
 }

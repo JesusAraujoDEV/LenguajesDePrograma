@@ -10,26 +10,17 @@ export class Card {
   name: string;
 
   @Column({ nullable: true })
-  image: string;
+  image1: string;
+
+  @Column({ nullable: true })
+  image2: string;
 
   @Column({ nullable: true })
   rarity: string;
 
   @Column({ nullable: true })
-  type: string;
-
+  maxLevel: number;
+  
   @Column({ nullable: true })
-  damage: number;
-
-  @Column({ nullable: true })
-  health: number;
-
-  @Column({ nullable: true })
-  targets: string;
-
-  @Column({ nullable: true })
-  speed: string;
-
-  @Column({ nullable: true })
-  range: string;
+  elixirCost: number;
 }

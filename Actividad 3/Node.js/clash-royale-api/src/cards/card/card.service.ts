@@ -43,7 +43,7 @@ export class CardService {
   }
 
   // Metodo para filtras las cartas por atributo type
-  async findByType(type: string): Promise<Card[]> {
-    return this.cardsRepository.find({ where: { type } });
+  async findByRarity(rarity: string): Promise<Card[]> {
+    return this.cardsRepository.find({ where: { rarity } });
   }
 }
