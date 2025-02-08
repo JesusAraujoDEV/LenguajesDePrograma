@@ -37,4 +37,9 @@ export class CardService {
     await this.cardsRepository.update(id, cardData);
     return this.cardsRepository.findOneBy({ id });
   }
+
+  // Metodo para filtras las cartas por atributo type
+  async findByType(type: string): Promise<Card[]> {
+    return this.cardsRepository.find({ where: { type } });
+  }
 }
