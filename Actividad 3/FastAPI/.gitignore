@@ -36,4 +36,8 @@ pip-delete-this-directory.txt
 # Archivos de despliegue temporales
 dist/
 build/
+<<<<<<< HEAD
 *.egg-info/
+=======
+*.egg-info/
+>>>>>>> fba3b57116bbbfb23e467899ac98958bdf852287
