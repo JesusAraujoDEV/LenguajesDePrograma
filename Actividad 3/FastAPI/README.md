@@ -34,7 +34,7 @@ Asegúrate de tener instalados los siguientes requisitos antes de comenzar:
 
 Ejecuta el servidor de desarrollo con Uvicorn:
 ```sh
-fastapi dev
+fastapi dev .\app\main.py
 ```
 
 La API estará disponible en: [http://127.0.0.1:8000](http://127.0.0.1:8000)
@@ -53,7 +53,7 @@ Crea un archivo `.env` para almacenar variables sensibles como claves secretas, 
 Ejemplo:
 ```
 DATABASE_URL=mysql+pymysql://user:password@localhost/dbname
-SECRET_KEY=mysecretkey
+DATABASE_PASSWORD=mysecretkey
 ```
 
 ## Pruebas
