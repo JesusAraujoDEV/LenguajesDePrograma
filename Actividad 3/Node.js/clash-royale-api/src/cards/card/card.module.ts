@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([Card])],
   controllers: [CardController],
-  providers: [CardService]
+  providers: [CardService],
+  exports: [CardService], // Exporta el CardService para que pueda ser usado por otros módulos
 })
 export class CardModule {}
