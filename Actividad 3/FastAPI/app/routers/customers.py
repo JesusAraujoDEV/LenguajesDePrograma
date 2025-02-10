@@ -16,3 +16,15 @@ async def create_customer(customer_data: CustomerCreate, session: SessionDep):
 @router.get("/customers", response_model=list[Customer], tags=["Customers"])
 async def list_customer(session: SessionDep):
     return session.exec(select(Customer)).all()
+
+@router.get("/customers/{id_customer}", response_model=Customer, tags=["Customers"])
+async def get_customer(id_customer: int, session: SessionDep):
+    try:
+        # customer = session.exec(select(Customer).where(Customer.id == id_customer)).first()
+        customer = session.get(Customer, id_customer)
+        if customer is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    return customer
+
