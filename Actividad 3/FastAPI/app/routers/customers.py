@@ -40,3 +40,18 @@ async def delete_customer(id_customer: int, session: SessionDep):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     return {"detail": "ok"}
+
+@router.patch("/customers/{id_customer}",
+            response_model=Customer, 
+            status_code=status.HTTP_201_CREATED, 
+            tags=["Customers"])
+async def edit_customer(customer_data: CustomerUpdate, id_customer: int, session: SessionDep):
+    customer = session.get(Customer, id_customer)
+    if customer is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
+    update_data = customer_data.model_dump(exclude_unset=True)
+    customer.sqlmodel_update(update_data)
+    session.add(customer)
+    session.commit()
+    session.refresh(customer)
+    return customer
