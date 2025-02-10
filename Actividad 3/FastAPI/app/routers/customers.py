@@ -12,3 +12,7 @@ async def create_customer(customer_data: CustomerCreate, session: SessionDep):
     session.commit()
     session.refresh(customer)
     return customer
+
+@router.get("/customers", response_model=list[Customer], tags=["Customers"])
+async def list_customer(session: SessionDep):
+    return session.exec(select(Customer)).all()
