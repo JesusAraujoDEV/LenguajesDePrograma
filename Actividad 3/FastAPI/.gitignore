@@ -1,5 +1,6 @@
 # Entorno virtual
 venv/
+api_fastapi/
 .env/
 .venv/
 virtualenv/
