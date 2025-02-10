@@ -1,0 +1,39 @@
+# Entorno virtual
+venv/
+api_fastapi/
+.env/
+.venv/
+virtualenv/
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Configuración del entorno y dependencias
+*.env
+*.venv
+.envrc
+
+# Archivos de logs
+logs/
+*.log
+
+# Archivos de base de datos temporales
+*.sqlite3
+*.db
+
+# Dependencias instaladas
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Configuración del IDE/editor de texto
+.vscode/
+.idea/
+*.swp
+
+# Archivos de despliegue temporales
+dist/
+build/
+*.egg-info/
