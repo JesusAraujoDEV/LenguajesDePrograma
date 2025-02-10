@@ -80,6 +80,32 @@ func DeleteTask(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func UpdateTask(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	task_id, err := strconv.Atoi(vars["id"])
+	var updatedTask task
+	if err != nil {
+		fmt.Fprint(w, " Invalid ID")
+		return
+	}
+
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprint(w, " Please Enter Valid Data")
+		return
+	}
+	json.Unmarshal(reqBody, &updatedTask)
+
+	for i, task := range tasks {
+		if task.ID == task_id {
+			tasks = append(tasks[:i], tasks[i+1:]...)
+			updatedTask.ID = task_id
+			tasks = append(tasks, updatedTask)
+			fmt.Fprint(w, "The task id with ID %v has been updated succesfully", task_id)
+		}
+	}
+}
+
 func indexRoute(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "WELCOME TO ADO API LETSGOOOOO")
 }
@@ -93,6 +119,6 @@ func main() {
 	router.HandleFunc("/tasks", createTasks).Methods("POST")
 	router.HandleFunc("/tasks/{id}", getTask).Methods("GET")
 	router.HandleFunc("/tasks/{id}", DeleteTask).Methods("DELETE")
-
+	router.HandleFunc("/tasks/{id}", UpdateTask).Methods("PUT")
 	log.Fatal(http.ListenAndServe(":3000", router))
 }
