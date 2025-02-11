@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "royaleFont";
+    margin: 0;
+    padding: 0;
+    background-color: #ececec;
+    min-height: 100vh;
+
+}
+
+.header{
+    display: flex;
+    padding: 5px 10px;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: #000;
+    justify-content: space-between;
+    
+}
+
+.header__main-container{
+    display: flex;
+    align-items: center;
+}
+
+.header__img{
+    width: 7rem;
+}
+
+.header__secondary-tex-container{
+    margin-right: .5rem;
+}
+
+.header__text, .header__secondary-text{
+    color: #fff;
+}
+
+.main{
+    background-color: #fff;
+    max-width: 1500px;
+    margin: 2rem auto;
+    border-radius: 20px;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    justify-content: space-evenly;
+
+}
+
+.card {
+    max-width: clamp(125px, 25%, 200px);
+    position: relative;
+    border-radius: 20px;
+    background-color: #1A72C366;
+    
+    filter: drop-shadow(0 0 4px #000);
+}
+
+.card__worker  {
+    max-height: 240px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column-reverse;
+}
+
+.card__worker img {
+    max-width: 100%;
+    border-radius: 20px;
+    position: relative;
+}
+
+.card__name{
+    
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    filter: drop-shadow(0 0 4px #000);
+    font-size: clamp(.75rem, 3vw, 1.25rem);
+    padding-top: 5px;
+}
+
+
+.card__front{
+    background-color: #1A72C3;
+    width: 100%;
+    padding: 0 .25rem;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.card__back{
+    background-color: #fff;
+    padding: 0 .25rem;
+    background-color: #1A72C3;
+    
+}
+
+.card__back div {
+    color: #fff;
+    filter: drop-shadow(0 0 4px #000);
+    font-size: clamp(.65rem, 2vw, 1rem);
+    margin-bottom: .5rem;
+}
+
+.card__front, .card__back {
+    backface-visibility: hidden;
+    transition: transform 1s;
+    border-radius: 20px;
+    padding-bottom: 9px;
+}
+
+.card:hover .card__back{
+    transform: perspective(1200px) rotateY(360deg);
+}
+
+.card:hover .card__front{
+    transform: perspective(1200px) rotateY(180deg);
+}
+
+.card__front{
+    transform: perspective(1200px) rotateY(0deg);
+}
+
+.card__back{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    padding: 12px;
+    transform: perspective(1200px) rotateY(180deg);
+}
+
+
+@media (max-width: 600px) {
+    .card__worker  {
+        max-height: 145px;
+    }
+    .main {
+        gap: 2rem;
+    }
+    .header__secondary-tex-container{
+        display: none;
+    }
+}  
