@@ -1,0 +1,86 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #abe7ff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinear contenido al inicio para permitir desplazamiento */
+  height: 100vh;
+  overflow-y: auto; /* Habilitar scroll si es necesario */
+}
+
+.container {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 900px; /* Aumentar un poco el tamaño máximo */
+  text-align: center;
+  overflow: hidden; /* Evitar desbordamiento interno */
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Sección de canciones */
+.songs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Se adapta dinámicamente */
+  gap: 15px;
+  justify-content: center;
+  padding: 10px;
+  max-height: 70vh; /* Limitar la altura para evitar que crezca demasiado */
+  overflow-y: auto; /* Habilitar scroll si hay muchas canciones */
+}
+
+/* Estilos de cada tarjeta */
+.song-item {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, background 0.3s ease;
+  cursor: pointer;
+}
+
+.song-item:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.song-item h3 {
+  margin: 10px 0 5px;
+  color: #333;
+  font-size: 16px;
+}
+
+.song-item p {
+  margin: 5px 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.song-item img {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+/* Asegurar que el scroll funcione bien en dispositivos móviles */
+@media (max-width: 600px) {
+  .songs-list {
+    max-height: none; /* Permitir que crezca en pantallas pequeñas */
+    overflow-y: visible;
+  }
+}

@@ -11,79 +11,124 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type task struct {
-	ID      int    `json:ID`
-	Name    string `json:Name`
-	Content string `json:Content`
+type song struct {
+	ID        int    `json:"ID"`
+	Title     string `json:"Title"`
+	Album     string `json:"Album"`
+	Duration  string `json:"Duration"`
+	URL_Image string `json:"URL_Image"`
+	URL_Song  string `json:"URL_Song"`
 }
 
-type AllTasks []task
+type Allsongs []song
 
-var tasks = AllTasks{
+var songs = Allsongs{
 	{
-		ID:      1,
-		Name:    "Tarea 1",
-		Content: "Some Content",
+		ID:        1,
+		Title:     "Elf",
+		Album:     "Elf",
+		Duration:  "4:20",
+		URL_Image: "https://i.scdn.co/image/ab67616d0000b2739e1c223d7a087f9dfb3757fe",
+		URL_Song:  "https://open.spotify.com/track/0235CQ0hquNPhCvcDVPj0Y?si=dc13c6b2f5544937",
+	},
+	{
+		ID:        2,
+		Title:     "踊 (Odo)",
+		Album:     "狂言 (Kyogen)",
+		Duration:  "3:30",
+		URL_Image: "https://m.media-amazon.com/images/I/71-QIs-F2ZL._UF1000,1000_QL80_.jpg",
+		URL_Song:  "https://open.spotify.com/track/2MuWTIM3b0YEAskbeeFE1i?si=0f9b748b79964d7e",
+	},
+	{
+		ID:        3,
+		Title:     "うっせぇわ (Usseewa)",
+		Album:     "狂言 (Kyogen)",
+		Duration:  "3:24",
+		URL_Image: "https://m.media-amazon.com/images/I/71-QIs-F2ZL._UF1000,1000_QL80_.jpg",
+		URL_Song:  "https://open.spotify.com/track/5xrtzzzikpG3BLbo4q1Yul?si=6e8694777a4b4e1d",
+	},
+	{
+		ID:        4,
+		Title:     "新時代 (Shinjidai)",
+		Album:     "ONE PIECE FILM RED",
+		Duration:  "3:49",
+		URL_Image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Ado_-_Uta%27s_Songs%2C_One_Piece_Film_Red.png/220px-Ado_-_Uta%27s_Songs%2C_One_Piece_Film_Red.png",
+		URL_Song:  "https://open.spotify.com/track/1ew7qJcTiwJvMeU97jxi7z?si=90a42b50c3f74e7e",
+	},
+	{
+		ID:        5,
+		Title:     "ギラギラ (Gira Gira)",
+		Album:     "ギラギラ",
+		Duration:  "3:57",
+		URL_Image: "https://m.media-amazon.com/images/I/71-QIs-F2ZL._UF1000,1000_QL80_.jpg",
+		URL_Song:  "https://open.spotify.com/track/4GtTUp9fak2ueWnjk1sov7?si=5405b0f7f2834dd2",
+	},
+	{
+		ID:        6,
+		Title:     "私は最強 (Watashi wa Saikyou)",
+		Album:     "ONE PIECE FILM RED",
+		Duration:  "4:10",
+		URL_Image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Ado_-_Uta%27s_Songs%2C_One_Piece_Film_Red.png/220px-Ado_-_Uta%27s_Songs%2C_One_Piece_Film_Red.png",
+		URL_Song:  "https://open.spotify.com/track/6HR1pSOrwxrxLrKm7dT1YF?si=48b7c2873c99482e",
 	},
 }
 
-func createTasks(w http.ResponseWriter, r *http.Request) {
-	var newTask task
+func createsongs(w http.ResponseWriter, r *http.Request) {
+	var newsong song
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		fmt.Fprint(w, "Insert a valid Task")
+		fmt.Fprint(w, "Insert a valid song")
 	}
-	json.Unmarshal(reqBody, &newTask)
-	newTask.ID = len(tasks) + 1
-	tasks = append(tasks, newTask)
+	json.Unmarshal(reqBody, &newsong)
+	newsong.ID = len(songs) + 1
+	songs = append(songs, newsong)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(newTask)
+	json.NewEncoder(w).Encode(newsong)
 }
 
-func getTasks(w http.ResponseWriter, r *http.Request) {
+func getsongs(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(tasks)
+	json.NewEncoder(w).Encode(songs)
 }
 
-func getTask(w http.ResponseWriter, r *http.Request) {
+func getsong(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
-	task_id, err := strconv.Atoi(vars["id"])
+	song_id, err := strconv.Atoi(vars["id"])
 	if err != nil {
 		fmt.Fprint(w, " Invalid ID")
 		return
 	}
 
-	for _, task := range tasks {
-		if task.ID == task_id {
-			json.NewEncoder(w).Encode(task)
+	for _, song := range songs {
+		if song.ID == song_id {
+			json.NewEncoder(w).Encode(song)
 		}
 	}
 }
 
-func DeleteTask(w http.ResponseWriter, r *http.Request) {
+func Deletesong(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	task_id, err := strconv.Atoi(vars["id"])
+	song_id, err := strconv.Atoi(vars["id"])
 	if err != nil {
 		fmt.Fprint(w, " Invalid ID")
 		return
 	}
 
-	for i, task := range tasks {
-		if task.ID == task_id {
-			tasks = append(tasks[:i], tasks[i+1:]...)
-			fmt.Fprint(w, "The task with ID %v has been removed succesfully", task_id)
+	for i, song := range songs {
+		if song.ID == song_id {
+			songs = append(songs[:i], songs[i+1:]...)
+			fmt.Fprintf(w, "The song with ID %v has been removed successfully", song_id)
 		}
 	}
-
 }
 
-func UpdateTask(w http.ResponseWriter, r *http.Request) {
+func Updatesong(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	task_id, err := strconv.Atoi(vars["id"])
-	var updatedTask task
+	song_id, err := strconv.Atoi(vars["id"])
+	var updatedsong song
 	if err != nil {
 		fmt.Fprint(w, " Invalid ID")
 		return
@@ -94,31 +139,35 @@ func UpdateTask(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, " Please Enter Valid Data")
 		return
 	}
-	json.Unmarshal(reqBody, &updatedTask)
+	json.Unmarshal(reqBody, &updatedsong)
 
-	for i, task := range tasks {
-		if task.ID == task_id {
-			tasks = append(tasks[:i], tasks[i+1:]...)
-			updatedTask.ID = task_id
-			tasks = append(tasks, updatedTask)
-			fmt.Fprint(w, "The task id with ID %v has been updated succesfully", task_id)
+	for i, song := range songs {
+		if song.ID == song_id {
+			songs = append(songs[:i], songs[i+1:]...)
+			updatedsong.ID = song_id
+			songs = append(songs, updatedsong)
+			fmt.Fprintf(w, "The song with ID %v has been updated successfully", song_id)
 		}
 	}
 }
 
-func indexRoute(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "WELCOME TO ADO API LETSGOOOOO")
-}
-
 func main() {
-
 	router := mux.NewRouter().StrictSlash(true)
 
-	router.HandleFunc("/", indexRoute)
-	router.HandleFunc("/tasks", getTasks).Methods("GET")
-	router.HandleFunc("/tasks", createTasks).Methods("POST")
-	router.HandleFunc("/tasks/{id}", getTask).Methods("GET")
-	router.HandleFunc("/tasks/{id}", DeleteTask).Methods("DELETE")
-	router.HandleFunc("/tasks/{id}", UpdateTask).Methods("PUT")
+	// Servir archivos estáticos desde la carpeta "static"
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+
+	// Ruta para la página principal
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/index.html")
+	})
+
+	// Rutas de la API
+	router.HandleFunc("/songs", getsongs).Methods("GET")
+	router.HandleFunc("/songs", createsongs).Methods("POST")
+	router.HandleFunc("/songs/{id}", getsong).Methods("GET")
+	router.HandleFunc("/songs/{id}", Deletesong).Methods("DELETE")
+	router.HandleFunc("/songs/{id}", Updatesong).Methods("PUT")
+
 	log.Fatal(http.ListenAndServe(":3000", router))
 }
