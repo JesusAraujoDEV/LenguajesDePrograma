@@ -1,0 +1,23 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards</title>
+</head>
+<body>
+  <h1>Lista de Cartas</h1>
+  <ul>
+    <% cards.forEach(card => { %>
+      <li>
+        <h2><%= card.name %></h2>
+        <p><strong>Rareza:</strong> <%= card.rarity %></p>
+        <p><strong>Nivel Máximo:</strong> <%= card.maxLevel %></p>
+        <p><strong>Costo de Elixir:</strong> <%= card.elixirCost %></p>
+        <img src="<%= card.image1 %>" alt="<%= card.name %>" width="100">
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
