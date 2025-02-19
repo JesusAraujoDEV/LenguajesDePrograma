@@ -37,6 +37,6 @@ function displaySongs(songs) {
     songsList.appendChild(songItem);
   });
 }
-//Profe escuche ado :)
+//Profe escuche ado :D
 // Llamar a la función para obtener y mostrar las canciones al cargar la página
 fetchSongs();
