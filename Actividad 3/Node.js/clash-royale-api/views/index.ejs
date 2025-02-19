@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royale Api</title>
+    <link rel="stylesheet" href="/css/Style.css">
+    <link rel="stylesheet" href="/css/font.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__main-container">
+            <div class="header__img-container">
+                <img class="header__img" src="/images/logo.png" alt="Logo Clash Royale">
+            </div>
+            <div class="header__text-container">
+                <span class="header__text">Api</span>
+            </div>
+        </div>
+        <div class="header__secondary-tex-container">
+            <span class="header__secondary-text">View Cards</span>
+        </div>
+    </header>
+    <main class="main">
+      <% cards.forEach(card => {
+        %>
+          <div class="card">
+            <div class="card__front">
+                <div class="card__name"><%= card.name %></div>
+                <div class="card__worker">
+                    <img src="<%= card.image1 %>" >
+                </div>
+            </div> 
+            <div class="card__back">
+                <div>maxLevel: <%= card.maxLevel %></div>
+                <div>elixirCost: <%= card.elixirCost %></div>
+                <div>rarity: <%= card.rarity %></div>
+            </div>       
+        </div>
+        <%
+      }) %>
+        
+    </main>
+</body>
+</html>
